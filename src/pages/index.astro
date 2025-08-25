@@ -1,0 +1,73 @@
+---
+import Beneficios from "../components/Beneficios.astro";
+import Cursos from "../components/Cursos.astro";
+import VideoPp from "../components/VideoPp.jsx";
+import Testimonials from "../components/Testimonials.astro";
+import Layout from "../layouts/Layout.astro";
+import "../styles/global.css";
+
+// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
+// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+---
+
+<Layout>
+	<section
+		class="relative flex justify-center items-center gap-4 overflow-hidden pt-36"
+	>
+		<div>
+			<h1
+				class="font-bold md:text-7xl md:text-start text-center text-balance max-w-[20ch] mx-auto md:leading-[1.16] text-5xl drop-shadow-lg"
+			>
+				Curso de <span class="text-bgPrimary">Robótica</span> en Casa
+			</h1>
+
+			<p
+				class="text-gray-500 text-2xl drop-shadow-md md:text-start text-center"
+			>
+				Todo lo que necesitas aprender en un sólo lugar
+			</p>
+
+			<div class="flex md:justify-start justify-center gap-4 mt-6">
+				<button
+					class="px-5 py-4 rounded-xl bg-bgPrimary text-white flex items-center gap-x-2 hover:scale-105 transition-all duration-300 text-lg"
+				>
+					Se parte de esta familia
+					<span
+						class="text-xs bg-gray-100 text-black px-2 py-1 rounded-lg"
+					>
+						Comprar
+					</span>
+				</button>
+			</div>
+		</div>
+		<img src="/video/robot.gif" class="hidden md:flex" />
+	</section>
+
+	<section
+		class="grid md:grid-cols-3 grid-cols-1 gap-4 my-10 max-w-7xl mx-auto md:px-0 px-4"
+	>
+		<Cursos />
+		<Cursos />
+		<Cursos />
+		<Cursos />
+		<Cursos />
+		<Cursos />
+	</section>
+	<section class="bg-bgPrimary mt-35 py-12">
+		<div
+			class="flex flex-col items-center gap-3  max-w-7xl mx-auto md:px-0 px-4"
+		>
+			<Beneficios />
+		</div>
+	</section>
+	<section
+		class="grid md:grid-cols-4 grid-cols-1 mt-35 container mx-auto md:px-0 px-4 gap-y-4"
+	>
+		<VideoPp client:load />
+	</section>
+	<section
+		class="flex justify-center flex-col items-center mt-35 max-w-7xl md:px-0 px-4 mx-auto"
+	>
+		<Testimonials />
+	</section>
+</Layout>

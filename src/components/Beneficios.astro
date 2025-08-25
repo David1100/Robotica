@@ -1,0 +1,55 @@
+---
+const beneficios = [
+  {
+    title: "Acceso inmediato",
+    icon: "/icons/scan-face.svg",
+    text: "Ingresa fácilmente a la plataforma virtual con tu usuario y contraseña desde el primer día. Todo está preparado para que comiences tu aprendizaje sin esperas."
+  },
+  {
+    title: "Misión 1",
+    icon: "/icons/target.svg",
+    text: "Inicia tu recorrido con la Introducción a la robótica educativa. Completa esta primera misión en un mes, a tu ritmo y con acompañamiento de nuestro equipo. Incluye certificado y software gratuito LEGO WEDO."
+  },
+  {
+    title: "Clases en vivo",
+    icon: "/icons/video.svg",
+    text: "Al aprobar la primera misión, avanzas gratis a la siguiente y disfrutas de tres encuentros en vivo con un tutor experto, los sábados de 2 a 3 p.m., para reforzar tu aprendizaje."
+  },
+  {
+    title: "Club de Robótica",
+    icon: "/icons/bot.svg",
+    text: "Con tu inscripción obtienes acceso al Club, donde puedes continuar misiones adicionales a un precio especial de $80.000 pesos cada una, con plataforma y sesiones en vivo incluidas."
+  },
+  {
+    title: "12 misiones",
+    icon: "/icons/notebook-pen.svg",
+    text: "El programa completo consta de 12 misiones, una por mes, diseñadas para que desarrolles tus habilidades paso a paso y logres dominar la robótica educativa de forma práctica y divertida."
+  },
+  {
+    title: "Certificado digital",
+    icon: "/icons/file-badge.svg",
+    text: "Cada misión aprobada incluye un certificado oficial que reconoce tus logros y avances. Esto te permitirá construir un portafolio de evidencias de tu aprendizaje en robótica educativa."
+  }
+];
+---
+
+<h1 class="text-4xl font-semibold text-white">Beneficios del curso</h1>
+<p class="text-brand-gray text-lg text-gray-200">
+  Razones para dar el siguiente paso en tu desarrollo
+</p>
+
+<div class="mt-12">
+  <ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {beneficios.map((beneficio) => (
+      <li class="flex flex-col gap-3 items-start hover:scale-[1.02] transition-transform duration-300">
+        <div class="flex gap-2 items-center">
+          <span class="bg-white p-2 rounded-lg flex-shrink-0">
+            <img src={beneficio.icon} class="w-6 h-6" alt={beneficio.title} />
+          </span>
+          <h2 class="text-xl text-white">{beneficio.title}</h2>
+        </div>
+        <p class="text-lg text-gray-200 ">{beneficio.text}</p>
+      </li>
+    ))}
+  </ul>
+</div>
