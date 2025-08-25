@@ -11,7 +11,7 @@ export default function VideoPp() {
           Descubre cómo nace un{" "}
           <span className="text-bgPrimary font-bold">Robot.</span>
         </h1>
-        <p className="text-gray-500 text-2xl drop-shadow-md text-balance mt-3">
+        <p className="text-gray-400 text-2xl drop-shadow-md text-balance mt-3">
           Mira en acción cómo combinamos piezas, sensores y programación
           para dar vida a robots educativos. A través de ejemplos
           prácticos, aprenderás que la robótica no es complicada, sino

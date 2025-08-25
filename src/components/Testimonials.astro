@@ -39,7 +39,7 @@ const testimonials_items = [
 
 <ul class="mt-10 columns-1 gap-5 sm:columns-2 sm:gap-7 md:columns-3 pb-16">
   {testimonials_items.map((item) => (
-    <li class="border border-[#c5c5c5] bg-gray-200 rounded-2xl p-5 break-inside-avoid mb-7 shadow-lg">
+    <li class="border border-gray-700 bg-gray-800 rounded-2xl p-5 break-inside-avoid mb-7 shadow-lg">
       <header class="flex items-center gap-2.5">
         <img
           src={item.avatar}
@@ -51,10 +51,10 @@ const testimonials_items = [
         />
         <div>
           <h3 class="text-lg font-semibold ">{item.name}</h3>
-          <p class="text-black/60">{item.status}</p>
+          <p class="text-white/60">{item.status}</p>
         </div>
       </header>
-      <p class="text-black/70 mt-2.5">
+      <p class="text-white/70 mt-2.5">
         {item.text}
       </p>
     </li>
