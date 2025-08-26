@@ -1,0 +1,45 @@
+---
+import KitsComponent from "../components/KitsComponent.astro";
+import Layout from "../layouts/Layout.astro";
+import "../styles/global.css";
+
+const item_kit = [
+    {
+        title: "Kit de Robótica Workstation",
+        price: "470.000",
+        edad: "7+",
+        image : "/images/wedo.png",
+        items: [
+            { count: 1, text: "Controlador programable." },
+            { count: 1, text: "Sensor de proximidad." },
+            { count: 1, text: "Sensor de inclinación." },
+            { count: 1, text: "Servomotor." },
+            { count: 276, text: "Bloques." },
+            { count: "", text: "Software descarga gratuita Wedo 2.0 Lego." },
+        ],
+    },
+    {
+        title: "Kit de Robótica Workstation + caja organizadora",
+        price: "620.000",
+        edad: "7+",
+        image : "/images/wedo2.png",
+        items: [
+            { count: 1, text: "Controlador programable." },
+            { count: 1, text: "Sensor de proximidad." },
+            { count: 1, text: "Sensor de inclinación." },
+            { count: 1, text: "Servomotor." },
+            { count: 1, text: "Caja organizadora." },
+            { count: 276, text: "Bloques." },
+            { count: "", text: "Software descarga gratuita Wedo 2.0 Lego." },
+        ],
+    },
+];
+---
+
+<Layout>
+    <section
+        class="grid md:grid-cols-2 grid-cols-1 gap-4 pt-36 pb-12 max-w-7xl mx-auto md:px-0 px-4"
+    >
+        {item_kit.map((item) => <KitsComponent itemData={item} />)}
+    </section>
+</Layout>

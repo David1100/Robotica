@@ -1,0 +1,88 @@
+---
+import AccesoriosComponent from "../components/AccesoriosComponent.astro";
+import Layout from "../layouts/Layout.astro";
+import "../styles/global.css";
+
+const item_kit = [
+    {
+        title: "Controlador Programable",
+        price: "95.000",
+        edad: "7+",
+        image : "/images/wedo.png",
+        description: "El controlador programable LEGO WeDo 2.0 es el corazón de tus proyectos de robótica. Permite conectar sensores y servomotores para dar vida a tus creaciones mediante programación por bloques en PC o Tablet."
+
+    },
+    {
+        title: "Sensor de Proximidad",
+        price: "65.000",
+        edad: "7+",
+        image : "/images/wedo.png",
+        description: "El sensor de proximidad para LEGO WeDo 2.0 permite detectar objetos a distancia y reaccionar en tiempo real en tus proyectos de robótica. Ideal para ampliar las funciones de tus robots educativos."
+
+    },
+    {
+        title: "Sensor de Inclinación",
+        price: "65.000",
+        edad: "7+",
+        image : "/images/wedo.png",
+        description: "El sensor de inclinación para LEGO WeDo 2.0 detecta cambios en la orientación y movimiento, permitiendo a tus proyectos reaccionar al giro, balanceo o inclinación. Es ideal para robots que requieren control de dirección y estabilidad."
+
+    },
+    {
+        title: "Servomotor",
+        price: "65.000",
+        edad: "7+",
+        image : "/images/wedo.png",
+        description: "El servomotor para LEGO WeDo 2.0 es un motor inteligente que permite controlar movimientos precisos en tus proyectos de robótica. Ideal para crear robots que giren, levanten o impulsen mecanismos con gran exactitud."
+
+    },
+    {
+        title: "Set # 1 Bloques",
+        price: "29.000",
+        edad: "7+",
+        image : "/images/wedo.png",
+        description: "Este set incluye 276 bloques LEGO WeDo 2.0, perfectos para ampliar tus construcciones y proyectos de robótica. Ideal para reponer piezas perdidas o para aumentar la creatividad en el diseño de tus robots."
+
+    },
+    {
+        title: "Set # 2 Bloques",
+        price: "29.000",
+        edad: "7+",
+        image : "/images/wedo.png",
+        description: "Segundo set de expansión con 276 bloques LEGO WeDo 2.0, diseñado para complementar tus proyectos y ofrecer aún más posibilidades de construcción. Perfecto para quienes desean contar con un mayor inventario de piezas para retos avanzados de robótica."
+
+    },
+    {
+        title: "Set # 3 Bloques",
+        price: "29.000",
+        edad: "7+",
+        image : "/images/wedo.png",
+        description: "Segundo set de expansión con 276 bloques LEGO WeDo 2.0, diseñado para complementar tus proyectos y ofrecer aún más posibilidades de construcción. Perfecto para quienes desean contar con un mayor inventario de piezas para retos avanzados de robótica."
+
+    },
+    {
+        title: "Set # 4 Bloques",
+        price: "29.000",
+        edad: "7+",
+        image : "/images/wedo.png",
+        description: "Segundo set de expansión con 276 bloques LEGO WeDo 2.0, diseñado para complementar tus proyectos y ofrecer aún más posibilidades de construcción. Perfecto para quienes desean contar con un mayor inventario de piezas para retos avanzados de robótica."
+
+    },
+    {
+        title: "Set # 5 Bloques",
+        price: "29.000",
+        edad: "7+",
+        image : "/images/wedo.png",
+        description: "Segundo set de expansión con 276 bloques LEGO WeDo 2.0, diseñado para complementar tus proyectos y ofrecer aún más posibilidades de construcción. Perfecto para quienes desean contar con un mayor inventario de piezas para retos avanzados de robótica."
+
+    },
+];
+---
+
+<Layout>
+    <section
+        class="grid md:grid-cols-3 grid-cols-1 gap-4 pt-36 pb-12 max-w-7xl mx-auto md:px-0 px-4"
+    >
+        {item_kit.map((item) => <AccesoriosComponent itemData={item} />)}
+    </section>
+</Layout>

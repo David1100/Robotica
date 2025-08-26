@@ -5,6 +5,7 @@ import VideoPp from "../components/VideoPp.jsx";
 import Testimonials from "../components/Testimonials.astro";
 import Layout from "../layouts/Layout.astro";
 import "../styles/global.css";
+import GalleryComponent from "../components/GalleryComponent.astro";
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
@@ -12,7 +13,7 @@ import "../styles/global.css";
 
 <Layout>
 	<section
-		class="relative flex justify-center items-center gap-4 overflow-hidden pt-36"
+		class="relative flex justify-center items-center gap-4 overflow-hidden pt-36 animate-slide-in-top"
 	>
 		<div>
 			<h1
@@ -32,19 +33,25 @@ import "../styles/global.css";
 					class="px-5 py-4 rounded-xl bg-bgPrimary text-white flex items-center gap-x-2 hover:scale-105 transition-all duration-300 text-lg"
 				>
 					Se parte de esta familia
-					<span
+					<a
+						href="/kits"
 						class="text-xs bg-gray-100 text-black px-2 py-1 rounded-lg"
 					>
-						Comprar
-					</span>
+						Quiero el kit <strong>LEGO</strong>
+					</a>
 				</button>
 			</div>
 		</div>
-		<img src="/video/robot.gif" class="hidden md:flex" />
+		<div class="hidden md:flex bg-radialGradiente">
+			<img
+				src="/images/wedo.png"
+				class="animate-bouncing animate-iteration-count-infinite animate-duration-[3200ms]"
+			/>
+		</div>
 	</section>
 
 	<section
-		class="grid md:grid-cols-3 grid-cols-1 gap-4 my-10 max-w-7xl mx-auto md:px-0 px-4"
+		class="grid md:grid-cols-3 grid-cols-1 gap-4 my-10 max-w-7xl mx-auto md:px-0 px-4 animate-blurred-fade-in animate-delay-400"
 	>
 		<Cursos />
 		<Cursos />
@@ -53,15 +60,19 @@ import "../styles/global.css";
 		<Cursos />
 		<Cursos />
 	</section>
-	<section class="bg-bgPrimary mt-35 py-12">
+	<section class="bg-bgPrimary mt-35 py-12 relative">
 		<div
-			class="flex flex-col items-center gap-3  max-w-7xl mx-auto md:px-0 px-4"
+			class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black z-0"
+		>
+		</div>
+		<div
+			class="flex flex-col items-center gap-3 max-w-7xl mx-auto md:px-0 px-4 relative z-10"
 		>
 			<Beneficios />
 		</div>
 	</section>
 	<section
-		class="grid md:grid-cols-4 grid-cols-1 mt-35 container mx-auto md:px-0 px-4 gap-y-4"
+		class="grid md:grid-cols-4 grid-cols-1 mt-35 max-w-7xl mx-auto md:px-0 px-4 gap-y-4"
 	>
 		<VideoPp client:load />
 	</section>
@@ -69,5 +80,10 @@ import "../styles/global.css";
 		class="flex justify-center flex-col items-center mt-35 max-w-7xl md:px-0 px-4 mx-auto"
 	>
 		<Testimonials />
+	</section>
+	<section
+		class="flex justify-center flex-col items-center mt-35 max-w-7xl md:px-0 px-4 mx-auto"
+	>
+		<GalleryComponent />
 	</section>
 </Layout>

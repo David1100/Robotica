@@ -1,22 +1,101 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Fredoka:wght@300..700&family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
+@plugin "@midudev/tailwind-animations";
 
 :root {
-    --bgPrimary: rgb(225, 124, 1);
+    --bgPrimary: rgb(255, 145, 0);
+    --rgbPrimary: rgba(255, 145, 0, 0.2);
 }
 
 @theme inline {
     --color-bgPrimary: var(--bgPrimary);
+    --color-rgbPrimary: var(--rgbPrimary);
 }
 
 
 html {
     font-family: 'Fredoka', sans-serif;
-    background-color: black;
-    color:white;
+    color: white;
+    background-color: #0a0a0a;
 }
 
-button{
+body {
+    /* color base */
+    background-image:
+        radial-gradient(circle at 10% 5%, var(--rgbPrimary) 0%, transparent 6%),
+        radial-gradient(circle at 85% 30%, var(--rgbPrimary) 0%, transparent 6%),
+        radial-gradient(circle at 15% 95%, var(--rgbPrimary) 0%, transparent 6%),
+        radial-gradient(circle at 45% 70%, var(--rgbPrimary) 0%, transparent 6%);
+    background-attachment: fixed;
+}
+
+button {
     cursor: pointer;
+}
+
+.bg-radialGradiente {
+    background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.2), transparent 70%);
+}
+
+.lego {
+    position: fixed;
+    top: -50px;
+    width: 45px;
+    height: 45px;
+    animation: fall 9s linear infinite;
+}
+
+.lego:nth-child(1) {
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.lego:nth-child(2) {
+    left: 25%;
+    animation-delay: 1s;
+}
+
+.lego:nth-child(3) {
+    left: 15%;
+    animation-delay: 2s;
+}
+
+.lego:nth-child(4) {
+    left: 35%;
+    animation-delay: 3s;
+}
+
+.lego:nth-child(5) {
+    left: 55%;
+    animation-delay: 4s;
+}
+
+.lego:nth-child(6) {
+    left: 45%;
+    animation-delay: 6s;
+}
+
+.lego:nth-child(7) {
+    left: 65%;
+    animation-delay: 8s;
+}
+
+.lego:nth-child(8) {
+    left: 90%;
+    animation-delay: 12s;
+}
+
+.lego:nth-child(9) {
+    left: 95%;
+    animation-delay: 8s;
+}
+
+@keyframes fall {
+    0% {
+        top: -50px;
+    }
+
+    100% {
+        top: 100vh;
+    }
 }
