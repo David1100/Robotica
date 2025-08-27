@@ -4,8 +4,9 @@ import Layout from "@/layouts/Layout.astro";
 
 const item_kit = [
     {
-        title: "Kit de Robótica Workstation",
-        price: "470.000",
+        id:1,
+        name: "Kit de Robótica Workstation",
+        price: "470000",
         edad: "7+",
         image : "/images/wedo.png",
         items: [
@@ -18,8 +19,9 @@ const item_kit = [
         ],
     },
     {
-        title: "Kit de Robótica Workstation + caja organizadora",
-        price: "620.000",
+        id:2,
+        name: "Kit de Robótica Workstation + caja organizadora",
+        price: "620000",
         edad: "7+",
         image : "/images/wedo2.png",
         items: [
@@ -39,6 +41,6 @@ const item_kit = [
     <section
         class="grid md:grid-cols-2 grid-cols-1 gap-4 pt-36 pb-12 max-w-7xl mx-auto md:px-0 px-4"
     >
-        {item_kit.map((item) => <KitsComponent itemData={item} />)}
+        {item_kit.map((item) => <KitsComponent itemData={item}  />)}
     </section>
 </Layout>

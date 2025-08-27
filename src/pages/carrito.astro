@@ -1,0 +1,13 @@
+---
+import Layout from "@/layouts/Layout.astro"
+import CartShopping from "@/components/CartShopping"
+---
+
+<Layout>
+    <section class="pt-36 pb-12 max-w-7xl mx-auto md:px-0 px-4 h-screen flex justify-center items-center animate-slide-in-top">    
+        <article class="border-[1px] border-bgPrimary/50 p-8 rounded-lg backdrop-blur-sm w-full max-w-5xl">
+            <h1 class="lg:text-2xl text-xl drop-shadow-sm">Esto es lo que llevarás</h1>
+                <CartShopping client:load/>
+        </article>
+    </section>
+</Layout>

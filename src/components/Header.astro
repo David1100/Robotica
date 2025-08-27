@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import CartHome from "./CartHome";
 const menuItems = [
   { label: "Programas", icon: "programs", href: "/programs" },
   { label: "Kits", icon: "kits", href: "/kits" },
@@ -32,7 +33,7 @@ const currentPath = Astro.url.pathname;
           menuItems.map((item) => (
             <a
               href={item.href}
-              class={`flex gap-2 items-center hover:bg-gray-200/30 transition-all duration-300 p-4 rounded-xl border border-transparent group hover:text-bgPrimary ${currentPath === item.href ? "text-bgPrimary bg-gray-200/10" : null}`}
+              class={`flex gap-2 items-center hover:bg-gray-200/30 transition-all duration-300 p-4 rounded-xl border border-transparent group hover:text-bgPrimary drop-shadow-md  ${currentPath == item.href ? "text-bgPrimary bg-gray-200/10" : "text-gray-700"}`}
             >
               <Icon
                 name={item.icon}
@@ -47,14 +48,17 @@ const currentPath = Astro.url.pathname;
     </nav>
 
     <!-- Botón usuario (desktop) -->
-    <button
-      class="hidden md:flex gap-2 items-center hover:bg-gray-200/30 transition-all duration-300 p-4 rounded-xl "
-    >
-      <div class="rounded-full bg-bgPrimary p-2">
-        <img src="/icons/user.svg" width="16" alt="" />
-      </div>
-      Iniciar sesión
-    </button>
+    <ul class="flex gap-2 items-center">
+      <button
+        class="hidden md:flex gap-2 items-center hover:bg-gray-200/30 transition-all duration-300 p-4 rounded-xl drop-shadow-md text-gray-700"
+      >
+        <div class="rounded-full bg-bgPrimary p-2">
+          <img src="/icons/user.svg" width="16" alt="" />
+        </div>
+        Iniciar sesión
+      </button>
+      <CartHome client:load />
+    </ul>
 
     <!-- Hamburguesa (mobile) -->
     <button
