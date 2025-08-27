@@ -4,32 +4,32 @@ const testimonials_items = [
     avatar: "/avatar/avatar01.svg",
     name: "Andrés León",
     status: "Estudiante",
-    text: "Este curso superó mis expectativas. Desde el primer día tuve acceso a materiales claros y prácticos que me ayudaron a entender la robótica de forma sencilla."
+    text: "Este curso superó mis expectativas. Desde el primer día tuve acceso a materiales claros y prácticos que me ayudaron a entender la robótica de forma sencilla.",
   },
   {
     avatar: "/avatar/avatar01.svg",
     name: "María Fernanda",
     status: "Docente de Tecnología",
-    text: "Lo que más me gustó fue la metodología. Pude aplicar lo aprendido con mis estudiantes y ver cómo se entusiasmaban con cada misión."
+    text: "Lo que más me gustó fue la metodología. Pude aplicar lo aprendido con mis estudiantes y ver cómo se entusiasmaban con cada misión.",
   },
   {
     avatar: "/avatar/avatar01.svg",
     name: "Carlos Gómez",
     status: "Ingeniero en formación",
-    text: "El acompañamiento en vivo hizo toda la diferencia. Cada sesión resolvió mis dudas y me motivó a seguir avanzando."
+    text: "El acompañamiento en vivo hizo toda la diferencia. Cada sesión resolvió mis dudas y me motivó a seguir avanzando.",
   },
   {
     avatar: "/avatar/avatar01.svg",
     name: "Valentina Ruiz",
     status: "Madre de familia",
-    text: "Inscribí a mi hijo y ha sido increíble verlo tan comprometido y feliz aprendiendo de robótica paso a paso."
+    text: "Inscribí a mi hijo y ha sido increíble verlo tan comprometido y feliz aprendiendo de robótica paso a paso.",
   },
   {
     avatar: "/avatar/avatar01.svg",
     name: "Julián Torres",
     status: "Desarrollador Junior",
-    text: "Siempre quise aprender robótica pero no sabía por dónde empezar. Este curso me dio la ruta clara y práctica para lograrlo."
-  }
+    text: "Siempre quise aprender robótica pero no sabía por dónde empezar. Este curso me dio la ruta clara y práctica para lograrlo.",
+  },
 ];
 ---
 
@@ -38,25 +38,25 @@ const testimonials_items = [
 </h1>
 
 <ul class="mt-10 columns-1 gap-5 sm:columns-2 sm:gap-7 md:columns-3 pb-16">
-  {testimonials_items.map((item) => (
-    <li class="border border-gray-700 bg-gray-800 rounded-2xl p-5 break-inside-avoid mb-7 shadow-lg">
-      <header class="flex items-center gap-2.5">
-        <img
-          src={item.avatar}
-          alt={`Avatar de ${item.name}`}
-          loading="lazy"
-          width="80"
-          height="80"
-          class="w-16 aspect-square rounded-full object-cover"
-        />
-        <div>
-          <h3 class="text-lg font-semibold ">{item.name}</h3>
-          <p class="text-white/60">{item.status}</p>
-        </div>
-      </header>
-      <p class="text-white/70 mt-2.5">
-        {item.text}
-      </p>
-    </li>
-  ))}
+  {
+    testimonials_items.map((item) => (
+      <li class="border border-gray-200 backdrop-blur-md rounded-2xl p-5 break-inside-avoid mb-7 shadow-lg">
+        <header class="flex items-center gap-2.5">
+          <img
+            src={item.avatar}
+            alt={`Avatar de ${item.name}`}
+            loading="lazy"
+            width="80"
+            height="80"
+            class="w-16 aspect-square rounded-full object-cover"
+          />
+          <div>
+            <h3 class="text-lg font-semibold ">{item.name}</h3>
+            <p class="">{item.status}</p>
+          </div>
+        </header>
+        <p class=" mt-2.5">{item.text}</p>
+      </li>
+    ))
+  }
 </ul>
