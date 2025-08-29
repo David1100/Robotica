@@ -1,0 +1,342 @@
+---
+import AddToCart from "@/components/AddToCart";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import Layout from "@/layouts/Layout.astro";
+import { getData } from "@/utils/fetchData";
+import { functionToken } from "@/utils/functions";
+import { Icon } from "astro-icon/components";
+
+
+export async function getStaticPaths() {
+
+    const resCoursesItem = await getData(
+        `?wstoken=${functionToken(null)}&wsfunction=core_course_get_courses_by_field&moodlewsrestformat=json&field=category&value=1`,
+    );
+
+    return resCoursesItem.courses.map((item: any) => ({
+        params: { slug: item.shortname },
+        props: { idCourse: item.id },
+    }));
+}
+
+const { slug } = Astro.params;
+const { idCourse } = Astro.props;
+
+const resCourseDetail = await getData(
+    `?wstoken=${functionToken(null)}&wsfunction=core_course_get_courses_by_field&moodlewsrestformat=json&field=shortname&value=${slug}`,
+);
+
+const resDetail = resCourseDetail.courses[0];
+
+const resCourseContent = await getData(
+    `?wstoken=${functionToken(null)}&wsfunction=core_course_get_contents&moodlewsrestformat=json&courseid=${idCourse}`,
+);
+
+const resContent = resCourseContent;
+
+let countModules = 0;
+
+resContent.forEach((element) => {
+    countModules += element.modules.filter((m) => m.visible === 1).length;
+});
+
+const product = [
+    {
+        name: "Introducción a la Robótica Educativa",
+        price: "80000",
+    },
+];
+
+const item_detalles = [
+    { text: "Acceso a la plataforma educativa" },
+    { text: "4 Retos prácticos con LEGO WeDo 2.0" },
+    { text: "Acompañamiento durante toda la misión" },
+    { text: "Certificación digital al finalizar" },
+];
+
+const item_aprende = [
+    { text: "Programar controladores básicos" },
+    { text: "Integrar sensores" },
+    { text: "Aplicar pensamiento lógico y computacional" },
+    { text: "Relacionar la robótica con situaciones reales" },
+    { text: "Desarrollar trabajo colaborativo y creativo" },
+];
+---
+
+<Layout>
+    <section
+        class="pt-36 pb-12 max-w-7xl mx-auto md:px-0 px-4 animate-slide-in-top"
+    >
+        <Breadcrumbs />
+
+        <!-- {JSON.stringify(resContent)} -->
+        <div class="grid md:grid-cols-5 grid-cols-1 gap-4">
+            <div class="col-span-3">
+                <div
+                    class="p-4 lg:p-12 relative backdrop-blur-xs rounded-xl shadow-lg shadow-bgPrimary/30"
+                >
+                    <Icon
+                        name={"certificate"}
+                        size={60}
+                        class="text-bgPrimary absolute right-4 top-2 animate-tada animate-iteration-count-infinite"
+                    />
+                    <!-- Imagen difuminada de fondo -->
+                    <div class="absolute inset-0 -z-10">
+                        <img
+                            src={resDetail.courseimage}
+                            alt="Fondo"
+                            class="w-full h-full object-cover blur-xs opacity-40"
+                        />
+                    </div>
+                    <span
+                        class="text-bgPrimary drop-shadow-md text-sm font-semibold"
+                    >
+                        Aplica solo para estudiantes con kit Workstation.
+                    </span>
+                    <h1
+                        class="text-2xl lg:text-3xl xl:text-4xl font-semibold mb-4 leading-tight drop-shadow-md text-balance"
+                    >
+                        Compra para desbloquear esta <span
+                            class="text-bgPrimary">misión</span
+                        >
+                    </h1>
+                    <h2 class="text-lg drop-shadow-md text-gray-600">
+                        Desata tu potencial en robótica y accede a formación
+                        exclusiva.
+                    </h2>
+
+                    <div
+                        class="mt-4 grid grid-cols-2 gap-2 lg:text-sm text-xs drop-shadow-md"
+                    >
+                        {
+                            item_detalles.map((item) => (
+                                <div class="border-[1px] border-bgPrimary/10 p-2 rounded-lg bg-bgPrimary text-white flex items-center gap-1 hover:scale-105 transition-all ">
+                                    <Icon
+                                        name={"check"}
+                                        class={"text-white"}
+                                        size={22}
+                                    />
+                                    {item.text}
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+                <div class="mt-12">
+                    <h1
+                        class="text-2xl sm:text-3xl md:text-4xl font-semibold text-balance"
+                    >
+                        {resDetail.fullname}
+                    </h1>
+                    <div
+                        class="mt-4 flex gap-2 items-center text-gray-600 drop-shadow-md text-balance text-lg"
+                    >
+                        <Icon
+                            name={"target"}
+                            size={45}
+                            class="text-bgPrimary"
+                        />
+                        <Fragment set:html={resDetail.summary} />
+                    </div>
+                    <div class="mt-12 flex flex-col gap-6">
+                        <div>
+                            <h2 class="text-lg md:text-xl drop-shadow-md">
+                                Lo que aprenderas
+                            </h2>
+                            <div class="flex flex-wrap mt-6 gap-2">
+                                {
+                                    item_aprende.map((item) => (
+                                        <div class="border-[1px] border-bgPrimary/10 p-2 rounded-lg bg-bgPrimary text-white flex items-center gap-1 hover:scale-105 transition-all text-sm">
+                                            {item.text}
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        </div>
+                        <div>
+                            <h2 class="text-lg md:text-xl drop-shadow-md">
+                                Contenido de la misión
+                            </h2>
+                            <div
+                                class="flex items-center gap-2 text-brand-gray text-sm flex-wrap text-gray-500"
+                            >
+                                <span>{resContent.length} Capitulos</span>
+                                <span>•</span>
+                                <span>{countModules} Modulos</span>
+                                <!-- <span>•</span>
+                                <span>1h 28m de duración total</span> -->
+                            </div>
+                            <ul class="flex flex-col gap-3 mt-6">
+                                {
+                                    resContent.map(
+                                        (capitulo: any, index: number) => (
+                                            <li class="rounded-lg shadow-md transition-all ">
+                                                <details
+                                                    open={index === 0}
+                                                    class="group"
+                                                >
+                                                    <summary class="cursor-pointer flex justify-between items-center p-4 rounded-md backdrop-blur-sm">
+                                                        <div>
+                                                            <h1 class="text-bgPrimary font-semibold">
+                                                                Capitulo{" "}
+                                                                {index + 1}
+                                                            </h1>
+                                                            <h2 class="text-gray-500 drop-shadow-md text-sm">
+                                                                {capitulo.name}
+                                                            </h2>
+                                                        </div>
+                                                        <Icon
+                                                            name="arrow"
+                                                            size={30}
+                                                            class="text-bgPrimary transition-transform duration-300 group-open:rotate-90"
+                                                        />
+                                                    </summary>
+
+                                                    <div class="overflow-hidden transition-all duration-500 max-h-0 group-open:max-h-96 backdrop-blur-sm">
+                                                        <ul class="px-4 py-2">
+                                                            {capitulo.modules.map(
+                                                                (item: any) => {
+                                                                    if (
+                                                                        item.visible ===
+                                                                        1
+                                                                    ) {
+                                                                        return (
+                                                                            <li class="flex justify-between items-center py-1 last:border-0 px-2 rounded-lg cursor-pointer">
+                                                                                <span class="text-gray-600">
+                                                                                    {
+                                                                                        item.name
+                                                                                    }
+                                                                                </span>
+                                                                                <Icon
+                                                                                    name={
+                                                                                        "check"
+                                                                                    }
+                                                                                    size={
+                                                                                        20
+                                                                                    }
+                                                                                    class={
+                                                                                        "text-green-600"
+                                                                                    }
+                                                                                />
+                                                                                {/* <span class="text-bgPrimary text-sm">
+                                                                                    1h
+                                                                                    28m
+                                                                                </span> */}
+                                                                            </li>
+                                                                        );
+                                                                    }
+                                                                    return null;
+                                                                },
+                                                            )}
+                                                        </ul>
+                                                    </div>
+                                                </details>
+                                            </li>
+                                        ),
+                                    )
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-span-2">
+                <div
+                    class="lg:p-12 p-4 relative backdrop-blur-xs rounded-3xl shadow-lg shadow-bgPrimary/30"
+                >
+                    <h1 class="text-xl drop-shadow-dm">La misión incluye:</h1>
+                    <ul
+                        class="mt-4 drop-shadow-md text-black/70 flex flex-col gap-2"
+                    >
+                        <li class="flex justify-between font-semibold">
+                            <span class="font-bold flex items-center gap-1"
+                                ><Icon
+                                    name={"play"}
+                                    size={15}
+                                    class=""
+                                />Duración:</span
+                            > No aplica
+                        </li>
+                        <li class="flex justify-between font-semibold">
+                            <span class="flex items-center gap-1"
+                                ><Icon name={"speaker"} size={15} class="" /> Lenguaje:</span
+                            > Español
+                        </li>
+                    </ul>
+                    <ul
+                        class="mt-4 w-full relative rounded-lg border border-bgPrimary bg-bgPrimary/10 flex justify-between overflow-hidden text-bgPrimary"
+                    >
+                        <li
+                            class="flex items-center justify-center flex-col flex-1"
+                        >
+                            <header
+                                class="bg-bgPrimary flex items-center justify-center gap-2 px-2 py-1 w-full"
+                            >
+                                <span class="block text-xs text-white"
+                                    >Capitulos</span
+                                >
+                            </header>
+                            <p class="py-2">{resContent.length}</p>
+                        </li>
+                        <li>
+                            <div class="h-full bg-bgPrimary w-[1px]"></div>
+                        </li>
+                        <li
+                            class="flex items-center justify-center flex-col flex-1"
+                        >
+                            <header
+                                class="bg-bgPrimary flex items-center justify-center gap-2 px-2 py-1 w-full"
+                            >
+                                <span class="block text-xs text-white"
+                                    >Modulos</span
+                                >
+                            </header>
+                            <p class="py-2">{countModules}</p>
+                        </li>
+                    </ul>
+                    <AddToCart
+                        product={product}
+                        client:load
+                        textoBtn={`Empieza tu misión por $ 80.000`}
+                    />
+                </div>
+                <div class="mt-12 flex flex-col gap-2">
+                    <h3 class="text-lg md:text-xl">Docente</h3>
+                    <header class="flex gap-3">
+                        <img
+                            src="/avatar/teacher.jpg"
+                            class="w-20 h-14 rounded-2xl"
+                            alt="Avatar Profersor"
+                        />
+                        <div>
+                            <h4 class="text-bgPrimary">
+                                {
+                                    resDetail.contacts.length > 1
+                                        ? resDetail.contacts[1].fullname
+                                        : resDetail.contacts[0].fullname
+                                }
+                            </h4>
+                            <p class="text-gray-500 text-sm">
+                                Ingeniero de sistemas
+                            </p>
+                        </div>
+                    </header>
+                    <p class="text-gray-600 drop-shadow-md text-balance">
+                        Descripcion de lo que sabe el profesional.
+                    </p>
+                    <p class="flex items-center gap-x-1.5 drop-shadow-md">
+                        <span>
+                            <Icon
+                                name={"robot"}
+                                size={35}
+                                class={"text-bgPrimary"}
+                            />
+                        </span>
+                        +15 años de experiencia en robotica.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>

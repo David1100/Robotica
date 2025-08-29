@@ -9,7 +9,7 @@ export default function VideoPp() {
       <div className="col-span-2 flex justify-center flex-col">
         <h1 className="text-4xl text-balance">
           Descubre cómo nace un{" "}
-          <span className="text-bgPrimary font-bold">Robot.</span>
+          <span className="text-bgPrimary font-semibold">Robot.</span>
         </h1>
         <p className="text-gray-400 text-2xl drop-shadow-md text-balance mt-3">
           Mira en acción cómo combinamos piezas, sensores y programación

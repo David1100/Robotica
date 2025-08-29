@@ -5,47 +5,6 @@ import VideoPp from "@/components/VideoPp.jsx";
 import Testimonials from "@/components/Testimonials.astro";
 import Layout from "@/layouts/Layout.astro";
 import GalleryComponent from "@/components/GalleryComponent.astro";
-
-const cursos_item = [
-	{
-		name: "Introduccion al curso",
-		duration: "1h 28m",
-		image: "/images/html-desde-cero.webp",
-		slug: "introduccion_al_curso",
-	},
-	{
-		name: "Introduccion al curso",
-		duration: "1h 28m",
-		image: "/images/html-desde-cero.webp",
-		slug: "introduccion_al_curso",
-	},
-	{
-		name: "Introduccion al curso",
-		duration: "1h 28m",
-		image: "/images/html-desde-cero.webp",
-		slug: "introduccion_al_curso",
-	},
-	{
-		name: "Introduccion al curso",
-		duration: "1h 28m",
-		image: "/images/html-desde-cero.webp",
-		slug: "introduccion_al_curso",
-	},
-	{
-		name: "Introduccion al curso",
-		duration: "1h 28m",
-		image: "/images/html-desde-cero.webp",
-		slug: "introduccion_al_curso",
-	},
-	{
-		name: "Introduccion al curso",
-		duration: "1h 28m",
-		image: "/images/html-desde-cero.webp",
-		slug: "introduccion_al_curso",
-	},
-];
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
@@ -54,7 +13,7 @@ const cursos_item = [
 	>
 		<div>
 			<h1
-				class="font-bold md:text-7xl md:text-start text-center text-balance max-w-[20ch] mx-auto md:leading-[1.16] text-5xl drop-shadow-lg"
+				class="font-semibold md:text-7xl md:text-start text-center text-balance max-w-[20ch] mx-auto md:leading-[1.16] text-5xl drop-shadow-lg"
 			>
 				Curso de <span class="text-bgPrimary">Robótica</span> en Casa
 			</h1>
@@ -88,9 +47,9 @@ const cursos_item = [
 	</section>
 
 	<section
-		class="grid md:grid-cols-3 grid-cols-1 gap-4 my-10 max-w-7xl mx-auto md:px-0 px-4 animate-blurred-fade-in animate-delay-400"
+		class="my-10 max-w-7xl mx-auto md:px-0 px-4 animate-blurred-fade-in animate-delay-400"
 	>
-		{cursos_item.map((item) => <Cursos itemData={item} />)}
+		<Cursos />
 	</section>
 	<section class="bg-bgPrimary mt-35 py-12 relative">
 		<div

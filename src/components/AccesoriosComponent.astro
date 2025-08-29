@@ -1,4 +1,5 @@
 ---
+import { formatPrice } from "@/utils/functions";
 import AddToCart from "./AddToCart";
 
 const { itemData } = Astro.props;
@@ -7,16 +8,8 @@ const { itemData } = Astro.props;
 <article
     class="rounded-xl border-[1px] border-bgPrimary shadow-md shadow-bgPrimary px-8 py-4 relative animate-slide-in-top"
 >
-    <!-- Imagen difuminada de fondo -->
-    <!-- <div class="absolute inset-0 -z-10">
-        <img
-            src="/images/fondo-lego.webp"
-            alt="Fondo"
-            class="w-full h-full object-cover blur-xs opacity-40"
-        />
-    </div> -->
     <div class="flex justify-between items-center">
-        <h1 class="text-4xl text-bgPrimary font-bold">${itemData.price}</h1>
+        <h1 class="text-4xl text-bgPrimary font-semibold">${formatPrice(itemData.price.toString())}</h1>
         <span
             class="border-bgPrimary border-[1px] text-black/50 w-8 h-8 flex items-center justify-center text-sm rounded-full"
             >{itemData.edad}</span

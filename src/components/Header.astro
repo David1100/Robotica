@@ -1,8 +1,9 @@
 ---
 import { Icon } from "astro-icon/components";
 import CartHome from "./CartHome";
+import BtnLogin from "./BtnLogin";
 const menuItems = [
-  { label: "Programas", icon: "programs", href: "/programs" },
+  { label: "Programas", icon: "programs", href: "/programas" },
   { label: "Kits", icon: "kits", href: "/kits" },
   { label: "Accesorios", icon: "puzzle", href: "/accesorios" },
 ];
@@ -49,14 +50,7 @@ const currentPath = Astro.url.pathname;
 
     <!-- Botón usuario (desktop) -->
     <ul class="flex gap-2 items-center">
-      <button
-        class="hidden md:flex gap-2 items-center hover:bg-gray-200/30 transition-all duration-300 p-4 rounded-xl drop-shadow-md text-gray-700"
-      >
-        <div class="rounded-full bg-bgPrimary p-2">
-          <img src="/icons/user.svg" width="16" alt="" />
-        </div>
-        Iniciar sesión
-      </button>
+      <BtnLogin client:load/>
       <CartHome client:load />
     </ul>
 

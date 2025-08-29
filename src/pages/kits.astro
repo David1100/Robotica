@@ -1,14 +1,15 @@
 ---
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import KitsComponent from "@/components/KitsComponent.astro";
 import Layout from "@/layouts/Layout.astro";
 
 const item_kit = [
     {
-        id:1,
+        id: 1,
         name: "Kit de Robótica Workstation",
         price: "470000",
         edad: "7+",
-        image : "/images/wedo.png",
+        image: "/images/wedo.png",
         items: [
             { count: 1, text: "Controlador programable." },
             { count: 1, text: "Sensor de proximidad." },
@@ -19,11 +20,11 @@ const item_kit = [
         ],
     },
     {
-        id:2,
+        id: 2,
         name: "Kit de Robótica Workstation + caja organizadora",
         price: "620000",
         edad: "7+",
-        image : "/images/wedo2.png",
+        image: "/images/wedo2.png",
         items: [
             { count: 1, text: "Controlador programable." },
             { count: 1, text: "Sensor de proximidad." },
@@ -39,8 +40,11 @@ const item_kit = [
 
 <Layout>
     <section
-        class="grid md:grid-cols-2 grid-cols-1 gap-4 pt-36 pb-12 max-w-7xl mx-auto md:px-0 px-4"
+        class="pt-36 pb-12 max-w-7xl mx-auto md:px-0 px-4"
     >
-        {item_kit.map((item) => <KitsComponent itemData={item}  />)}
+        <Breadcrumbs />
+        <div class="grid md:grid-cols-2 grid-cols-1 gap-4">
+            {item_kit.map((item) => <KitsComponent itemData={item} />)}
+        </div>
     </section>
 </Layout>
