@@ -1,4 +1,9 @@
+
+import { functionGetUser } from "./functions";
+
 const BASE_URL = import.meta.env.PUBLIC_BACKEND;
+const BASE_URL_LOGIN = import.meta.env.PUBLIC_LOGIN;
+const JWT_SECRET = import.meta.env.JWT_SECRET;
 
 export async function getData(url: any) {
 
@@ -6,10 +11,7 @@ export async function getData(url: any) {
         const response = await fetch(
             `${BASE_URL}${url}`,
             {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                method: "GET"
             },
         )
 
@@ -23,21 +25,55 @@ export async function getData(url: any) {
     }
 }
 
-export async function loginMoodle(username :string, password:string) {
-  const url = "https://www.capacitate.com.co/moodle40/login/token.php";
-  const params = new URLSearchParams({
-    username,
-    password,
-    service: "capacitate" // o el servicio que creaste en Moodle
-  });
+export async function getDataUser(url: string, cookieHeader?: string) {
+    const user = functionGetUser(cookieHeader);
+    if (!user) return null;
 
-  const res = await fetch(`${url}?${params.toString()}`);
-  const data = await res.json();
-  
-  if (data.error) {
-    throw new Error(data.error);
-  }
+    try {
+        const response = await fetch(
+            `${BASE_URL}${url}&userid=${user.number}`,
+            {
+                method: "GET"
+            },
+        )
 
-  return data.token; // este token lo usas en las demás peticiones
+        if (!response.ok) {
+            throw new Error(`Error en la solicitud: ${response.status}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error en getData:', error);
+        return null;
+    }
 }
+
+export async function getDataLogin(url: string) {
+    try {
+        const response = await fetch(`${BASE_URL_LOGIN}${url}`, { method: "GET" });
+
+        if (!response.ok) {
+            // Error de red o status HTTP
+            throw new Error(`Error en la solicitud: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        // Si Moodle devuelve error explícito
+        if (data.error || data.errorcode) {
+            return {
+                error: data.error || "Error desconocido en Moodle",
+                errorcode: data.errorcode || null
+            };
+        }
+
+        return data;
+    } catch (error) {
+        console.error("⚠️ Error en getDataLogin:", error);
+        return { error: "No se pudo conectar con el servidor." };
+    }
+}
+
+
+
+
 

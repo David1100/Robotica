@@ -50,7 +50,9 @@ const currentPath = Astro.url.pathname;
 
     <!-- Botón usuario (desktop) -->
     <ul class="flex gap-2 items-center">
-      <BtnLogin client:load/>
+      <div class="hidden md:block">
+        <BtnLogin client:load />
+      </div>
       <CartHome client:load />
     </ul>
 
@@ -79,15 +81,7 @@ const currentPath = Astro.url.pathname;
         </a>
       ))
     }
-
-    <button
-      class="flex gap-2 items-center hover:bg-gray-200/10 transition-all duration-300 p-3 rounded-lg"
-    >
-      <div class="rounded-full bg-bgPrimary p-2">
-        <img src="/icons/user.svg" width="16" alt="" />
-      </div>
-      Iniciar sesión
-    </button>
+    <BtnLogin client:load />
   </div>
 </header>
 
@@ -99,9 +93,9 @@ const currentPath = Astro.url.pathname;
   // Cambiar fondo al hacer scroll
   window.addEventListener("scroll", () => {
     if (window.scrollY > 50) {
-      header.classList.add("bg-white/60", "backdrop-blur-md", "shadow-md");
+      header.classList.add("bg-white/90" , "shadow-md");
     } else {
-      header.classList.remove("bg-white/60", "backdrop-blur-md", "shadow-md");
+      header.classList.remove("bg-white/90", "shadow-md");
     }
   });
 

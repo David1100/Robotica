@@ -1,3 +1,5 @@
+import { getData, getDataLogin } from "@/utils/fetchData";
+import { functionToken, setUserCookie } from "@/utils/functions";
 import { useEffect, useState } from "react";
 
 export default function PopupLogin({ onClose }) {
@@ -18,32 +20,54 @@ export default function PopupLogin({ onClose }) {
     setError(null);
 
     try {
-      const res = await fetch(
-        `https://www.capacitate.com.co/moodle40/login/token.php?service=moodle_mobile_app&username=${encodeURIComponent(
-          email
-        )}&password=${encodeURIComponent(password)}`
+      // 1. Login a Moodle
+      const res = await getDataLogin(
+        `service=moodle_mobile_app&username=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
       );
 
-      const data = await res.json();
-
-      if (data.error) {
-        setError(data.error);
-      } else {
-        console.log("✅ Login exitoso:", data);
-        // Guardar el token en localStorage o context
-        localStorage.setItem("moodle_token", data.token);
-        onClose();
+      if (!res) {
+        setError("El servidor no respondió. Inténtalo más tarde.");
+        return;
       }
+
+      // 2. Verificar si hubo error en la respuesta
+      if (res.error || res.errorcode) {
+        setError(res.error || "Credenciales inválidas.");
+        return;
+      }
+
+      // 3. Obtener info del usuario
+      const resUser = await getData(
+        `?wstoken=${functionToken(res.token)}&wsfunction=core_webservice_get_site_info&moodlewsrestformat=json`
+      );
+
+      if (!resUser) {
+        setError("No se pudo obtener la información del usuario.");
+        return;
+      }
+
+      // Guardar token real en localStorage
+      const userData = { number: resUser.userid, text: resUser.username };
+      const encoded = btoa(JSON.stringify(userData));
+      localStorage.setItem("_f", encoded);
+
+      setUserCookie(encoded);
+      window.location.reload(); // 🔄 recargar la página
+
+      // Cerrar popup
+      onClose();
+
     } catch (err) {
       console.error("❌ Error al iniciar sesión:", err);
-      setError("No se pudo conectar con el servidor.");
+      setError("Error inesperado. Inténtalo más tarde.");
     }
   };
+
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/60 backdrop-blur-md z-50">
       <div className="relative w-[90%] lg:w-[35%] max-w-md">
-        <div className="bg-white/50 rounded-lg flex flex-col items-center px-4 py-20 w-full">
+        <div className="bg-white/50 rounded-lg flex flex-col items-center px-4 py-10 w-full">
           <button
             onClick={onClose}
             className="absolute top-4 right-6 text-white text-xl hover:scale-105 transition-all"

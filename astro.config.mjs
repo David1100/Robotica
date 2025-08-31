@@ -8,6 +8,7 @@ import icon from 'astro-icon';
 import path from 'path';
 // https://astro.build/config
 export default defineConfig({
+  output: "server",
   integrations: [react(), icon()],
   vite: {
     plugins: [tailwindcss()],

@@ -1,17 +1,32 @@
 ---
-import { getData, loginMoodle } from "@/utils/fetchData";
+import { getData, getDataUser } from "@/utils/fetchData";
 import CursosItems from "./CursosItems.astro";
 import { functionToken } from "@/utils/functions";
+export const prerender = false;
+
+
 const res = await getData(
 	`?wstoken=${functionToken(null)}&wsfunction=core_course_get_courses_by_field&moodlewsrestformat=json&field=category&value=1`,
 );
+const resUser = await getDataUser(
+	`?wstoken=${functionToken(null)}&wsfunction=core_enrol_get_users_courses&moodlewsrestformat=json`,
+  Astro.request.headers.get("cookie") || undefined
+);
 
+const cursos_item_usser = resUser ?? [];
 const cursos_item = res.courses;
-loginMoodle("api_user", "Iso$%9001")
-	.then((token) => console.log("Token de sesión:", token))
-	.catch((err) => console.error("Error:", err.message));
+
+const cursosConEstado = cursos_item.map((curso: any) => {
+  const inscrito = cursos_item_usser.some(
+    (c: any) => c.id === curso.id // compara IDs
+  );
+  return {
+    ...curso,
+    inscrito, // true o false
+  };
+});
 ---
 
 <div class="grid md:grid-cols-3 grid-cols-1 gap-4">
-	{cursos_item.map((item) => <CursosItems itemData={item} />)}
+	{cursosConEstado.map((item:any) => <CursosItems itemData={item} />)}
 </div>

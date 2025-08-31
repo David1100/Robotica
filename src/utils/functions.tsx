@@ -1,12 +1,12 @@
 export const formatPrice = (value: string) => {
-    // Remueve todo lo que no sea número
-    const numericValue = value.replace(/\D/g, "");
+  // Remueve todo lo que no sea número
+  const numericValue = value.replace(/\D/g, "");
 
-    // Aplica formato de miles (con punto)
-    return numericValue.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  // Aplica formato de miles (con punto)
+  return numericValue.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 };
 
-export const formatString = (path:any) => {
+export const formatString = (path: any) => {
   // 1. Tomar solo lo que está después de la última barra
   let lastPart = path.split('/').pop();
 
@@ -17,10 +17,38 @@ export const formatString = (path:any) => {
   return lastPart.charAt(0).toUpperCase() + lastPart.slice(1);
 }
 
-export const functionToken = (term:string  | null = null) => {
+export const functionToken = (term: string | null = null) => {
   let tokenEnv = '2216e1364f6fee04807be02c2ed86b7d'
-  if(term){
+  if (term) {
     tokenEnv = term
   }
   return tokenEnv;
 }
+
+export const functionGetUser = (cookieHeader: string | undefined) => {
+  if (!cookieHeader) return null;
+
+  try {
+    const cookies = Object.fromEntries(
+      cookieHeader.split("; ").map(c => c.split("="))
+    );
+
+    if (!cookies._f) return null;
+
+    const decoded = JSON.parse(atob(cookies._f));
+    console.log("Usuario decodificado desde cookie _f:", decoded);
+    return decoded;
+  } catch (err) {
+    console.error("Error decodificando cookie _f:", err);
+    return null;
+  }
+};
+
+export const setUserCookie = (value: string) => {
+  // Caducidad de 1 día
+  const expires = new Date();
+  expires.setDate(expires.getDate() + 1);
+
+  document.cookie = `_f=${value}; path=/; expires=${expires.toUTCString()}; SameSite=Lax`;
+};
+
