@@ -1,12 +1,12 @@
 'use client'
-import { useEffect, useState } from "react";
 
 export default function BlockCourse({ slug, resDetail }) {
-    const [yaInscrito, setYaInscrito] = useState('false');
-    useEffect(() => {
-        const params = new URLSearchParams(window.location.search);
-        setYaInscrito(params.get("yaInscrito"));
-    }, [resDetail]);
+    const params = typeof window !== "undefined"
+        ? new URLSearchParams(window.location.search)
+        : null;
+
+    const yaInscrito = params?.get("yaInscrito");
+
     const item_detalles = [
         { text: "Acceso a la plataforma educativa" },
         { text: "4 Retos prácticos con LEGO WeDo 2.0" },

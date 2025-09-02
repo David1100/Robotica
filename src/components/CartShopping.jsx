@@ -31,7 +31,9 @@ export default function CartShopping() {
                             key={index}
                             className="border-b-[1px] border-bgPrimary/10 drop-shadow-sm py-2 px-4 flex gap-2 justify-between items-center text-gray-700 lg:text-lg text-base"
                         >
-                            {item.name}
+                            <img src={ item.category == 'courses' ? item.courseimage : item.image } width={60}  alt=""  className="rounded-lg"/>
+
+                            {item.fullname}
                             <span className="flex gap-2 text-sm">
                                 <button onClick={() => deleteToCart(item)}>{ item.cantidad == 1 ? '🗑️' : '-' }</button>
                                 <span className="text-bgPrimary">{item.cantidad}</span>

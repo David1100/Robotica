@@ -5,7 +5,8 @@ export type Product = {
     id: number;
     price: number;
     cantidad: number;
-    name: string;
+    fullname: string;
+    category: string;
 }
 
 type CartStore = {
@@ -25,7 +26,7 @@ export const useCartStore = create<CartStore>()(
 
             addToCart: (product: Product) => {
                 const cart = get().cart;
-                const existingProduct = cart.find((p) => p.id === product.id);
+                const existingProduct = cart.find((p) => p.id === product.id && p.category === product.category);
 
                 if (existingProduct) {
                     const updatedCart = cart.map((p) =>
@@ -38,18 +39,24 @@ export const useCartStore = create<CartStore>()(
             },
             deleteToCart: (product: Product) => {
                 const cart = get().cart;
-                const existingProduct = cart.find((p) => p.id === product.id);
+                const existingProduct = cart.find(
+                    (p) => p.id === product.id && p.category === product.category
+                );
 
                 if (existingProduct) {
                     if (existingProduct.cantidad > 1) {
                         // Resta uno
                         const updatedCart = cart.map((p) =>
-                            p.id === product.id ? { ...p, cantidad: p.cantidad - 1 } : p
+                            p.id === product.id && p.category === product.category
+                                ? { ...p, cantidad: p.cantidad - 1 }
+                                : p
                         );
                         set({ cart: updatedCart });
                     } else {
-                        // Si la cantidad es 1, elimínalo del carrito
-                        const updatedCart = cart.filter((p) => p.id !== product.id);
+                        // Si la cantidad es 1, elimina solo ese producto
+                        const updatedCart = cart.filter(
+                            (p) => !(p.id === product.id && p.category === product.category)
+                        );
                         set({ cart: updatedCart });
                     }
                 }

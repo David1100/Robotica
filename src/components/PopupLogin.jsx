@@ -46,8 +46,10 @@ export default function PopupLogin({ onClose }) {
         return;
       }
 
+      
       // Guardar token real en localStorage
-      const userData = { number: resUser.userid, text: resUser.username };
+      const userData = { number: resUser.userid, text: resUser.username, tk:res.token };
+      console.log("✅ Usuario autenticado:", userData);
       const encoded = btoa(JSON.stringify(userData));
       localStorage.setItem("_f", encoded);
 

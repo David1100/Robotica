@@ -1,5 +1,5 @@
 ---
-import AddToCart from "@/components/AddToCart";
+import AddToCartCourse from "@/components/AddToCartCourse";
 import BlockCourse from "@/components/BlockCourse";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import Layout from "@/layouts/Layout.astro";
@@ -237,10 +237,9 @@ const item_aprende = [
                             <p class="py-2">{countModules}</p>
                         </li>
                     </ul>
-                    <AddToCart
-                        product={product}
+                    <AddToCartCourse
+                        product={resDetail}
                         client:load
-                        textoBtn={`Empieza tu misión por $ 80.000`}
                     />
                 </div>
                 <div class="mt-12 flex flex-col gap-2">
